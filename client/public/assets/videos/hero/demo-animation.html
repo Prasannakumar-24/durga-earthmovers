@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Animation Demo - Durga Earthmovers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+        
+        .scene {
+            width: 100%;
+            max-width: 1920px;
+            height: 1080px;
+            position: relative;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+        }
+        
+        .excavator {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .excavator-body {
+            position: absolute;
+            width: 200px;
+            height: 120px;
+            background: #f4c430;
+            border-radius: 10px;
+            left: 50px;
+            top: 40px;
+            animation: moveBody 4s ease-in-out infinite;
+        }
+        
+        .excavator-arm {
+            position: absolute;
+            width: 150px;
+            height: 20px;
+            background: #d4a520;
+            left: 200px;
+            top: 80px;
+            transform-origin: left center;
+            animation: armMove 4s ease-in-out infinite;
+        }
+        
+        .excavator-bucket {
+            position: absolute;
+            width: 80px;
+            height: 60px;
+            background: #f4c430;
+            border-radius: 0 0 40px 40px;
+            left: 320px;
+            top: 60px;
+            animation: bucketMove 4s ease-in-out infinite;
+        }
+        
+        .excavator-track {
+            position: absolute;
+            width: 180px;
+            height: 40px;
+            background: #333;
+            border-radius: 20px;
+            left: 60px;
+            top: 150px;
+        }
+        
+        .ground {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, #8B4513 0%, #654321 100%);
+        }
+        
+        .dirt {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #8B4513;
+            border-radius: 50%;
+            animation: dirtFly 4s ease-in-out infinite;
+        }
+        
+        .dirt:nth-child(1) { left: 380px; top: 100px; animation-delay: 0s; }
+        .dirt:nth-child(2) { left: 400px; top: 90px; animation-delay: 0.2s; }
+        .dirt:nth-child(3) { left: 390px; top: 110px; animation-delay: 0.4s; }
+        .dirt:nth-child(4) { left: 410px; top: 95px; animation-delay: 0.6s; }
+        
+        .title {
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #f4c430;
+            font-size: 48px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            animation: titlePulse 2s ease-in-out infinite;
+        }
+        
+        .subtitle {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+        
+        @keyframes moveBody {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(20px); }
+        }
+        
+        @keyframes armMove {
+            0%, 100% { transform: rotate(-30deg); }
+            50% { transform: rotate(30deg); }
+        }
+        
+        @keyframes bucketMove {
+            0%, 100% { transform: translateY(0) rotate(-30deg); }
+            50% { transform: translateY(-30px) rotate(30deg); }
+        }
+        
+        @keyframes dirtFly {
+            0%, 100% { opacity: 0; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-50px); }
+        }
+        
+        @keyframes titlePulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.05); }
+        }
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .overlay h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #f4c430;
+        }
+        
+        .overlay p {
+            font-size: 18px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="scene">
+        <div class="title">DURGA EARTHMOVERS</div>
+        <div class="subtitle">3D Animation Demo - Replace with Actual Video</div>
+        
+        <div class="excavator">
+            <div class="excavator-body"></div>
+            <div class="excavator-arm"></div>
+            <div class="excavator-bucket"></div>
+            <div class="excavator-track"></div>
+            <div class="dirt"></div>
+            <div class="dirt"></div>
+            <div class="dirt"></div>
+            <div class="dirt"></div>
+        </div>
+        
+        <div class="ground"></div>
+        
+        <div class="overlay">
+            <h2>3D Animated Video Placeholder</h2>
+            <p>This is a CSS animation demonstration. Replace this with an actual 3D animated video showing Durga Earthmovers' heavy machinery in action.</p>
+            <p style="margin-top: 20px; color: #f4c430;">Video specifications: MP4, 1920x1080, 15-30 seconds, loop</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <rect width="1920" height="1080" fill="#1a1a1a"/>
+  <rect width="1920" height="1080" fill="url(#gradient)" opacity="0.3"/>
+  <text x="960" y="540" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#f4c430" text-anchor="middle">DURGA EARTHMOVERS</text>
+  <text x="960" y="600" font-family="Arial, sans-serif" font-size="32" fill="#ffffff" text-anchor="middle">HEAVY MACHINERY & EXCAVATION SERVICES</text>
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4c430;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4a520;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
