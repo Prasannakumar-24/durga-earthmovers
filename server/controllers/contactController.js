@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import mongoose from "mongoose";
 import ContactInquiry from "../models/ContactInquiry.js";
 
 const submitContact = async (req, res) => {
@@ -18,30 +19,39 @@ const submitContact = async (req, res) => {
     // 1. VALIDATE REQUIRED FIELDS
     // -----------------------------
 
-    if (!name || !phone || !email || !location || !message) {
+    if (!name || !phone || !email || !location) {
       return res.status(400).json({
         success: false,
         message: "Please fill in all required fields.",
       });
     }
 
+    const enquiryMessage =
+      message || `Project type: ${projectType || "Not specified"}`;
+
     // -----------------------------
     // 2. SAVE ENQUIRY TO MONGODB (with fallback)
     // -----------------------------
 
     let inquiry = null;
-    try {
-      inquiry = await ContactInquiry.create({
-        name,
-        phone,
-        email,
-        location,
-        projectType: projectType || "",
-        message,
-      });
-      console.log("Inquiry saved successfully:", inquiry._id);
-    } catch (dbError) {
-      console.log("MongoDB save failed, but continuing with email:", dbError.message);
+
+    // Skip the DB write when MongoDB isn't connected to fail fast
+    // instead of waiting for the mongoose buffer timeout.
+    if (mongoose.connection.readyState === 1) {
+      try {
+        inquiry = await ContactInquiry.create({
+          name,
+          phone,
+          email,
+          location,
+          projectType: projectType || "",
+        });
+        console.log("Inquiry saved successfully:", inquiry._id);
+      } catch (dbError) {
+        console.log("MongoDB save failed, but continuing with email:", dbError.message);
+      }
+    } else {
+      console.log("MongoDB not connected, skipping database save.");
     }
 
     // -----------------------------
@@ -152,7 +162,7 @@ const submitContact = async (req, res) => {
             border-radius: 6px;
             white-space: pre-wrap;
           ">
-            ${message}
+            ${enquiryMessage}
           </div>
 
           <hr style="

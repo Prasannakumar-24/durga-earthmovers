@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import companyConfig from '../config/companyConfig';
 
 const MachineryShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const sliderRef = useRef(null);
 
   const handleEnquiry = (serviceName) => {
     if (companyConfig.whatsapp) {

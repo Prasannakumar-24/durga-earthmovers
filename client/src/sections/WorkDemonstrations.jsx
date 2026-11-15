@@ -63,12 +63,12 @@ const WorkDemonstrations = () => {
                 <h3 className="text-xl font-poppins font-medium text-white mb-2 group-hover:text-construction-yellow transition-colors duration-300">
                   {work.name}
                 </h3>
-                <p className="text-concrete-gray text-sm leading-relaxed mb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-concrete-gray text-sm leading-relaxed mb-4 opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100">
                   {work.description}
                 </p>
                 <button
                   onClick={() => handleEnquiry(work.name)}
-                  className="flex items-center space-x-2 text-construction-yellow text-sm font-poppins font-medium uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="flex items-center space-x-2 text-construction-yellow text-sm font-poppins font-medium uppercase tracking-wider opacity-100 transition-opacity duration-300 sm:opacity-0 sm:group-hover:opacity-100"
                 >
                   <span>Enquire Now</span>
                   <ArrowRight size={16} />

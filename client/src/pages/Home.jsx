@@ -1,6 +1,3 @@
-import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import Hero from '../sections/Hero';
 import About from '../sections/About';

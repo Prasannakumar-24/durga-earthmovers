@@ -140,8 +140,10 @@ const About = () => {
             <div
               className="
                 absolute
-                -bottom-6
-                -right-6
+                -bottom-4
+                right-0
+                sm:-bottom-6
+                sm:-right-6
                 bg-construction-yellow
                 p-6
                 rounded-lg

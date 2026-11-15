@@ -13,6 +13,7 @@
 
 * {
   border-color: var(--color-concrete-gray);
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -25,6 +26,9 @@ body {
   font-family: var(--font-family-poppins);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overscroll-behavior-y: none;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -68,9 +72,12 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.btn-primary:hover {
-  background-color: var(--color-construction-yellow-dark);
-  transform: scale(1.05);
+/* Only scale on devices that support real hover (avoids stuck hover states on touch) */
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background-color: var(--color-construction-yellow-dark);
+    transform: scale(1.05);
+  }
 }
 
 .btn-secondary {
@@ -231,9 +238,11 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.3s;
 }
 
-.card-hover:hover {
-  transform: scale(1.05);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+@media (hover: hover) and (pointer: fine) {
+  .card-hover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
 }
 
 .glass-effect {
@@ -285,6 +294,41 @@ h1, h2, h3, h4, h5, h6 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #d4a520;
+}
+
+/* Slow cinematic zoom for showcase videos */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.08);
+  }
+}
+
+.ken-burns {
+  animation: ken-burns 24s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .ken-burns {
+    animation: none;
+    transform: scale(1.04);
+  }
 }
 
 /* Loading animation */

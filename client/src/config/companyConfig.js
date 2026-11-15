@@ -158,7 +158,7 @@ const companyConfig = {
       icon: "mountain",
       description:
         "Large-scale earthmoving for site leveling and land development.",
-      image: "/assets/images/services/earthmoving.svg",
+      image: "/assets/images/machinery/site leveling.jpg",
     },
 
     {
@@ -167,7 +167,7 @@ const companyConfig = {
       icon: "building",
       description:
         "Complete site preparation services for construction projects.",
-      image: "/assets/images/machinery/site preparation.jpg",
+      image: "/assets/images/machinery/site prepartaion.jpg",
     },
 
     {
@@ -176,7 +176,7 @@ const companyConfig = {
       icon: "package",
       description:
         "Efficient material handling and transportation services.",
-      image: "/assets/images/services/material-handling.svg",
+      image: "/assets/images/machinery/lorry.jpg",
     },
 
     {
@@ -185,7 +185,7 @@ const companyConfig = {
       icon: "hammer",
       description:
         "Comprehensive construction support with heavy machinery.",
-      image: "/assets/images/services/construction-support.svg",
+      image: "/assets/images/machinery/foundation excavation.jpg",
     },
 
     {
@@ -194,7 +194,7 @@ const companyConfig = {
       icon: "truck",
       description:
         "Professional machinery deployment and equipment rental services.",
-      image: "/assets/images/services/machinery-deployment.svg",
+      image: "/assets/images/machinery/equipment deployment.jpg",
     },
   ],
 

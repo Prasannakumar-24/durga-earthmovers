@@ -24,23 +24,6 @@ const Analytics = () => {
     }
   }, []);
 
-  // Track custom events
-  const trackEvent = (eventName, parameters = {}) => {
-    if (window.gtag) {
-      window.gtag('event', eventName, parameters);
-    }
-  };
-
-  // Track page views
-  const trackPageView = (pageName) => {
-    if (window.gtag) {
-      window.gtag('event', 'page_view', {
-        page_title: pageName,
-        page_location: window.location.href,
-      });
-    }
-  };
-
   return null; // This component doesn't render anything
 };
 

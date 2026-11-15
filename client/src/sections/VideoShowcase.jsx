@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, Minimize } from 'lucide-react';
 
 const VideoShowcase = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const videoRef = useRef(null);
@@ -20,22 +20,44 @@ const VideoShowcase = () => {
   };
 
   const toggleMute = () => {
+    const nextMuted = !isMuted;
+
     if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(!isMuted);
+      videoRef.current.muted = nextMuted;
     }
+
+    setIsMuted(nextMuted);
   };
 
   const toggleFullscreen = () => {
     if (videoRef.current) {
       if (!isFullscreen) {
-        videoRef.current.requestFullscreen();
+        videoRef.current.requestFullscreen?.();
       } else {
-        document.exitFullscreen();
+        document.exitFullscreen?.();
       }
-      setIsFullscreen(!isFullscreen);
     }
   };
+
+  // Keep fullscreen state in sync (e.g. when user presses Esc)
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+
+  // React's `muted` prop is unreliable on media elements — sync via ref
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = isMuted;
+    }
+  }, [isMuted]);
 
   return (
     <section className="py-20 lg:py-32 bg-charcoal">
@@ -64,19 +86,22 @@ const VideoShowcase = () => {
           <div className="aspect-video relative bg-charcoal-dark">
             <video
               ref={videoRef}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover cursor-pointer ken-burns"
               poster="/assets/images/hero/hero-poster.svg"
+              autoPlay
+              loop
               playsInline
               muted={isMuted}
+              onClick={togglePlay}
               onPlay={() => setIsPlaying(true)}
               onPause={() => setIsPlaying(false)}
             >
-              <source src="/assets/videos/projects/project-showcase.mp4" type="video/mp4" />
+              <source src="/assets/videos/hero/earthmoving-hero.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
             {/* Controls Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
             {/* Custom Controls */}
             <div className="absolute bottom-0 left-0 right-0 p-6 flex items-center justify-between">
@@ -104,6 +129,18 @@ const VideoShowcase = () => {
                 {isFullscreen ? <Minimize className="text-white" size={18} /> : <Maximize className="text-white" size={18} />}
               </button>
             </div>
+
+            {/* Sound indicator — browsers require a tap before audio can play */}
+            {isMuted && (
+              <button
+                onClick={toggleMute}
+                className="absolute top-4 right-4 z-10 flex items-center space-x-2 bg-black/60 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 text-white text-xs font-poppins font-medium uppercase tracking-wider hover:bg-construction-yellow hover:text-charcoal-dark transition-colors duration-300"
+                aria-label="Enable sound"
+              >
+                <VolumeX size={14} />
+                <span>Tap for sound</span>
+              </button>
+            )}
 
             {/* Play Button Overlay */}
             {!isPlaying && (

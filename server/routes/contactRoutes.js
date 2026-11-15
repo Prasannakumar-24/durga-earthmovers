@@ -4,5 +4,6 @@ import submitContact from "../controllers/contactController.js";
 const router = express.Router();
 
 router.post("/", submitContact);
+router.post("/contact", submitContact);
 
 export default router;

@@ -2,30 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import companyConfig from '../config/companyConfig';
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  // Detect scrolling
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  // Close mobile menu when changing pages
-  useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [location.pathname]);
 
   // Prevent page scrolling while mobile menu is open
   useEffect(() => {
@@ -103,9 +83,9 @@ const Navbar = () => {
             `}
           >
             <div className="flex items-center justify-between gap-4">
-              
+
               {/* =================================================
-                  LOGO (OUTSIDE GLASS SECTION)
+                  LOGO
               ================================================== */}
               <Link
                 to="/"
@@ -115,6 +95,7 @@ const Navbar = () => {
                   z-10
                   flex
                   items-center
+                  gap-3
                   shrink-0
                   group
                 "
@@ -122,110 +103,35 @@ const Navbar = () => {
                 <img
                   src="/assets/images/durga-earthmovers-logo.png"
                   alt="DURGA EARTHMOVERS"
-                  className="h-10 md:h-14 w-auto max-w-[140px] object-contain rounded-2xl"
-                  style={{ filter: 'none' }}
+                  className="h-10 md:h-14 w-auto max-w-[80px] md:max-w-[100px] object-contain drop-shadow-lg"
                 />
+                <span className="font-poppins font-medium text-white text-sm md:text-base tracking-wider leading-tight transition-colors duration-300 group-hover:text-construction-yellow">
+                  DURGA<br />EARTHMOVERS
+                </span>
               </Link>
 
               {/* =================================================
-                  GLASS NAVIGATION SECTION
+                  NAVIGATION BAR (no glass container)
               ================================================== */}
               <div
-                className={`
+                className="
                   relative
                   flex-1
                   flex
                   items-center
-                  justify-between
+                  justify-end
                   min-h-[68px]
-                  md:min-h-[76px]
-                  px-4
-                  md:px-7
-                  rounded-[22px]
-                  md:rounded-[26px]
-
-                  bg-white/[0.08]
-                  backdrop-blur-2xl
-                  backdrop-saturate-150
-
-                  border
-                  border-white/[0.20]
-
-                  shadow-[0_8px_40px_rgba(0,0,0,0.20)]
-
-                  overflow-hidden
-
-                  transition-all
-                  duration-500
-
-                  ${
-                    isScrolled
-                      ? 'bg-black/[0.35] border-white/[0.25] shadow-[0_12px_45px_rgba(0,0,0,0.30)]'
-                      : 'bg-white/[0.10]'
-                  }
-                `}
+                "
               >
-                {/* =================================================
-                    GLASS LIGHT REFLECTION
-                ================================================== */}
-                <div
-                  className="
-                    absolute
-                    inset-0
-                    pointer-events-none
-                    rounded-[22px]
-                    md:rounded-[26px]
-                    bg-gradient-to-b
-                    from-white/[0.14]
-                    via-transparent
-                    to-transparent
-                  "
-                />
 
                 {/* =================================================
-                    COMPANY NAME (INSIDE GLASS SECTION)
-                ================================================== */}
-                <Link
-                  to="/"
-                  onClick={closeMobileMenu}
-                  className="
-                    relative
-                    z-10
-                    hidden
-                    md:flex
-                    items-center
-                    shrink-0
-                    group
-                  "
-                >
-                  <div className="flex overflow-hidden">
-                    {'DURGA EARTHMOVERS'.split('').map((letter, index) => (
-                      <motion.span
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{
-                          delay: index * 0.1,
-                          duration: 0.3,
-                          ease: 'easeOut'
-                        }}
-                        className="text-lg md:text-xl font-poppins font-medium text-white tracking-wider transition-all duration-300 group-hover:text-construction-yellow"
-                      >
-                        {letter}
-                      </motion.span>
-                    ))}
-                  </div>
-                </Link>
-
-                {/* =================================================
-                    DESKTOP NAVIGATION
+                    DESKTOP NAVIGATION (hidden — hamburger menu used on all sizes)
                 ================================================== */}
                 <div
                   className="
                     relative
                     z-10
                     hidden
-                    md:flex
                     items-center
                     gap-1
                     lg:gap-2
@@ -305,14 +211,13 @@ const Navbar = () => {
               </div>
 
               {/* =================================================
-                  DESKTOP CTA
+                  DESKTOP CTA (hidden — available inside the menu)
               ================================================== */}
               <div
                 className="
                   relative
                   z-10
                   hidden
-                  md:flex
                   items-center
                 "
               >
@@ -378,7 +283,6 @@ const Navbar = () => {
                 className="
                   relative
                   z-[120]
-                  md:hidden
 
                   flex
                   items-center
@@ -447,7 +351,6 @@ const Navbar = () => {
                 ease: 'easeOut',
               }}
               className="
-                md:hidden
                 pointer-events-auto
                 px-3
                 pt-2
@@ -644,7 +547,6 @@ const Navbar = () => {
               bg-black/50
               backdrop-blur-sm
               z-[90]
-              md:hidden
             "
             aria-hidden="true"
           />

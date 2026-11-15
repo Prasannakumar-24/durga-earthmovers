@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import companyConfig from '../config/companyConfig';
 
 const CTA = () => {
+  const [patternAngle] = useState(() => Math.floor(Math.random() * 360));
+
   const handleWhatsAppClick = () => {
     if (companyConfig.whatsapp) {
       window.open(`https://wa.me/${companyConfig.whatsapp}`, '_blank');
@@ -15,7 +18,7 @@ const CTA = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(${Math.random() * 360}deg, transparent 24%, rgba(244, 196, 48, 0.3) 25%, rgba(244, 196, 48, 0.3) 26%, transparent 27%, transparent 74%, rgba(244, 196, 48, 0.3) 75%, rgba(244, 196, 48, 0.3) 76%, transparent 77%, transparent), linear-gradient(${Math.random() * 360}deg, transparent 24%, rgba(244, 196, 48, 0.3) 25%, rgba(244, 196, 48, 0.3) 26%, transparent 27%, transparent 74%, rgba(244, 196, 48, 0.3) 75%, rgba(244, 196, 48, 0.3) 76%, transparent 77%, transparent)`,
+          backgroundImage: `linear-gradient(${patternAngle}deg, transparent 24%, rgba(244, 196, 48, 0.3) 25%, rgba(244, 196, 48, 0.3) 26%, transparent 27%, transparent 74%, rgba(244, 196, 48, 0.3) 75%, rgba(244, 196, 48, 0.3) 76%, transparent 77%, transparent), linear-gradient(${(patternAngle + 90) % 360}deg, transparent 24%, rgba(244, 196, 48, 0.3) 25%, rgba(244, 196, 48, 0.3) 26%, transparent 27%, transparent 74%, rgba(244, 196, 48, 0.3) 75%, rgba(244, 196, 48, 0.3) 76%, transparent 77%, transparent)`,
           backgroundSize: '50px 50px'
         }} />
       </div>

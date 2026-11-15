@@ -1,37 +1,36 @@
 
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import companyConfig from '../config/companyConfig';
 
 const Hero = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-
+  // Pause the background video when it scrolls out of view to save battery/data on mobile
   useEffect(() => {
     const video = document.getElementById('hero-video');
 
-    if (video) {
-      const handleLoadedData = () => setVideoLoaded(true);
-
-      video.addEventListener('loadeddata', handleLoadedData);
-
-      return () => {
-        video.removeEventListener('loadeddata', handleLoadedData);
-      };
+    if (!video) {
+      return;
     }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
+    return () => observer.disconnect();
   }, []);
 
-  const handleWhatsAppClick = () => {
-    if (companyConfig.whatsapp) {
-      window.open(
-        `https://wa.me/${companyConfig.whatsapp}`,
-        '_blank'
-      );
-    }
-  };
-
   return (
-    <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen supports-[height:100dvh]:h-dvh min-h-[600px] flex items-center justify-center overflow-hidden">
 
       {/* Video Background */}
       <div className="absolute inset-0 overflow-hidden">
@@ -68,7 +67,7 @@ const Hero = () => {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-[60] section-container text-center">
+      <div className="relative z-[60] section-container text-center pt-24 md:pt-28">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +80,7 @@ const Hero = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="mt-16 text-5xl md:text-7xl lg:text-8xl font-poppins font-medium text-white leading-tight tracking-tight"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-poppins font-medium text-white leading-tight tracking-tight break-words"
           >
             {companyConfig.name}
           </motion.h1>
@@ -134,7 +133,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 max-w-4xl mx-auto"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-10 md:mt-16 max-w-4xl mx-auto"
         >
 
           {/* Machines */}
@@ -148,24 +147,25 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Heavy Equipment */}
-          <div className="text-center">
-            <div className="text-4xl md:text-5xl font-poppins font-medium text-construction-yellow mb-2">
-              HEAVY EQUIPMENT
-            </div>
-
-            <div className="text-concrete-gray text-sm uppercase tracking-wider">
-            </div>
-          </div>
-
           {/* Services */}
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-poppins font-medium text-construction-yellow mb-2">
-              {companyConfig.stats.projects}
+              {companyConfig.services.length}+
             </div>
 
             <div className="text-concrete-gray text-sm uppercase tracking-wider">
+              SERVICES
+            </div>
+          </div>
+
+          {/* Availability */}
+          <div className="text-center">
+            <div className="text-4xl md:text-5xl font-poppins font-medium text-construction-yellow mb-2">
               24/7
+            </div>
+
+            <div className="text-concrete-gray text-sm uppercase tracking-wider">
+              SUPPORT
             </div>
           </div>
 

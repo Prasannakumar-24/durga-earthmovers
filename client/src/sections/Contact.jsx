@@ -355,7 +355,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     autoComplete="name"
-                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
+                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
                     placeholder="Your name"
                   />
                 </div>
@@ -378,7 +378,7 @@ const Contact = () => {
                     required
                     autoComplete="tel"
                     inputMode="tel"
-                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
+                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
                     placeholder="Your phone number"
                   />
                 </div>
@@ -400,7 +400,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     autoComplete="email"
-                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
+                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
                     placeholder="Your email address"
                   />
                 </div>
@@ -422,7 +422,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     autoComplete="street-address"
-                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
+                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
                     placeholder="Your project location"
                   />
                 </div>
@@ -441,7 +441,7 @@ const Contact = () => {
                     name="projectType"
                     value={formData.projectType}
                     onChange={handleChange}
-                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
+                    className="w-full bg-charcoal-dark border border-concrete-gray/30 rounded-lg px-4 py-3 text-base text-white focus:outline-none focus:border-construction-yellow transition-colors duration-300"
                   >
                     <option value="">
                       Select project type

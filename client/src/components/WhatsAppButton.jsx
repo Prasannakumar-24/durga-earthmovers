@@ -20,7 +20,11 @@ const WhatsAppButton = () => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       onClick={handleWhatsAppClick}
-      className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300"
+      className="fixed z-50 w-14 h-14 sm:w-16 sm:h-16 bg-green-500 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition-colors duration-300"
+      style={{
+        right: 'max(1.25rem, env(safe-area-inset-right))',
+        bottom: 'max(1.25rem, env(safe-area-inset-bottom))',
+      }}
       aria-label="Contact via WhatsApp"
     >
       <MessageCircle className="text-white" size={32} />

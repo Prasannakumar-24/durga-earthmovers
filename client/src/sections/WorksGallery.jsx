@@ -8,16 +8,16 @@ const WorksGallery = () => {
 
   const filters = ['ALL', 'EXCAVATION', 'ROAD WORK', 'EARTHMOVING', 'SITE WORK', 'MACHINERY'];
 
-  // Placeholder project data - replace with actual project images
+  // Project images from the machinery photo library
   const projects = [
-    { id: 1, category: 'EXCAVATION', image: '/assets/images/projects/excavation-1.svg', title: 'Foundation Excavation' },
-    { id: 2, category: 'ROAD WORK', image: '/assets/images/projects/road-1.svg', title: 'Road Construction' },
-    { id: 3, category: 'EARTHMOVING', image: '/assets/images/projects/earthmoving-1.svg', title: 'Site Leveling' },
-    { id: 4, category: 'SITE WORK', image: '/assets/images/projects/site-1.svg', title: 'Site Preparation' },
-    { id: 5, category: 'MACHINERY', image: '/assets/images/projects/machinery-1.svg', title: 'Equipment Deployment' },
-    { id: 6, category: 'EXCAVATION', image: '/assets/images/projects/excavation-2.svg', title: 'Trench Digging' },
-    { id: 7, category: 'ROAD WORK', image: '/assets/images/projects/road-2.svg', title: 'Road Cutting' },
-    { id: 8, category: 'EARTHMOVING', image: '/assets/images/projects/earthmoving-2.svg', title: 'Land Development' },
+    { id: 1, category: 'EXCAVATION', image: '/assets/images/machinery/foundation excavation.jpg', title: 'Foundation Excavation' },
+    { id: 2, category: 'ROAD WORK', image: '/assets/images/machinery/road construction.jpg', title: 'Road Construction' },
+    { id: 3, category: 'EARTHMOVING', image: '/assets/images/machinery/site leveling.jpg', title: 'Site Leveling' },
+    { id: 4, category: 'SITE WORK', image: '/assets/images/machinery/site prepartaion.jpg', title: 'Site Preparation' },
+    { id: 5, category: 'MACHINERY', image: '/assets/images/machinery/equipment deployment.jpg', title: 'Equipment Deployment' },
+    { id: 6, category: 'EXCAVATION', image: '/assets/images/machinery/trench digging.jpg', title: 'Trench Digging' },
+    { id: 7, category: 'ROAD WORK', image: '/assets/images/machinery/road cutting.jpg', title: 'Road Cutting' },
+    { id: 8, category: 'EARTHMOVING', image: '/assets/images/machinery/land deployment.png', title: 'Land Development' },
   ];
 
   const filteredProjects = selectedFilter === 'ALL' 
@@ -61,7 +61,7 @@ const WorksGallery = () => {
             <button
               key={filter}
               onClick={() => setSelectedFilter(filter)}
-              className={`px-6 py-2 rounded-full font-poppins font-medium text-sm uppercase tracking-wider transition-all duration-300 ${
+              className={`px-4 sm:px-6 py-2 rounded-full font-poppins font-medium text-xs sm:text-sm uppercase tracking-wider transition-all duration-300 ${
                 selectedFilter === filter
                   ? 'bg-construction-yellow text-charcoal-dark'
                   : 'bg-charcoal text-white hover:bg-concrete-gray/20'
@@ -75,7 +75,7 @@ const WorksGallery = () => {
         {/* Gallery Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
         >
           <AnimatePresence>
             {filteredProjects.map((project, index) => (
@@ -106,11 +106,11 @@ const WorksGallery = () => {
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-dark via-charcoal-dark/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-construction-yellow text-xs font-poppins font-medium uppercase tracking-wider mb-1">
+                <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                  <p className="text-construction-yellow text-[10px] sm:text-xs font-poppins font-medium uppercase tracking-wider mb-1">
                     {project.category}
                   </p>
-                  <h3 className="text-white font-poppins font-medium text-lg">
+                  <h3 className="text-white font-poppins font-medium text-sm sm:text-lg line-clamp-1">
                     {project.title}
                   </h3>
                 </div>
